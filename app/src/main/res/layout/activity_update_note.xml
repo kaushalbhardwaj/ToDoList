@@ -89,7 +89,7 @@
             android:text="Set Time"
             android:id="@+id/time"
             android:layout_alignBottom="@+id/timebt"
-            android:layout_alignStart="@+id/add" />
+            android:layout_alignStart="@+id/update" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,8 +103,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
-            android:id="@+id/add"
+            android:text="Update"
+            android:id="@+id/update"
             android:layout_marginTop="74dp"
             android:layout_below="@+id/datebt"
             android:layout_centerHorizontal="true" />

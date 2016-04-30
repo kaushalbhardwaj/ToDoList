@@ -18,7 +18,7 @@ import com.example.khome.todolist.Database.Note;
 
 import java.util.Calendar;
 
-public class AddToDo extends AppCompatActivity {
+public class UpdateNote extends AppCompatActivity {
     ImageView date,time;
 
     Note n;
@@ -32,14 +32,33 @@ public class AddToDo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_to_do);
-        add=(Button)findViewById(R.id.add);
+        setContentView(R.layout.activity_update_note);
+        add=(Button)findViewById(R.id.update);
         n=new Note();
-        n.setDate(null);n.setTitle(null);n.setNote(null);n.setTime(null);
+        Bundle b=getIntent().getExtras();
+        String n1=b.getString("title").toString();
+        String p=b.getString("note").toString();
+        String c=b.getString("time").toString();
+        String id=b.getString("id").toString();
+        String d1=b.getString("date").toString();
+        n.setTitle(n1);
+        n.setNote(p);
+        n.setId(Long.parseLong(id));
+        n.setTime(c);
+        n.setDate(d1);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_addtodo);
         dh=new DatabaseHandler(this);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Add Note");
+        getSupportActionBar().setTitle("Note");
+        try {
+            dh.open();
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(getApplicationContext(), "error sql exception", Toast.LENGTH_SHORT).show();
+
+        }
+
         date=(ImageView)findViewById(R.id.datebt);
         time=(ImageView)findViewById(R.id.timebt);
         datetext=(TextView)findViewById(R.id.date);
@@ -47,12 +66,17 @@ public class AddToDo extends AppCompatActivity {
         title=(EditText)findViewById(R.id.title);
         note=(EditText)findViewById(R.id.note);
 
+        title.setText(n.getTitle());
+        note.setText(n.getNote());
+        datetext.setText(n.getDate());
+        timetext.setText(n.getTime());
+
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                TimePickerDialog tpd = new TimePickerDialog(AddToDo.this,
+                TimePickerDialog tpd = new TimePickerDialog(UpdateNote.this,
                         new TimePickerDialog.OnTimeSetListener() {
 
                             @Override
@@ -68,6 +92,22 @@ public class AddToDo extends AppCompatActivity {
             }
         });
 
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                n.setTitle(title.getText().toString());
+                n.setNote(note.getText().toString());
+
+                dh.update(n);
+                setResult(RESULT_OK);
+                finish();
+
+
+
+            }
+        });
+
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +118,7 @@ public class AddToDo extends AppCompatActivity {
                 mMonth = c.get(Calendar.MONTH);
                 mDay = c.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dpd = new DatePickerDialog(AddToDo.this,
+                DatePickerDialog dpd = new DatePickerDialog(UpdateNote.this,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -94,26 +134,8 @@ public class AddToDo extends AppCompatActivity {
                 dpd.show();
             }
         });
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                n.setTitle(title.getText().toString());
-                n.setNote(note.getText().toString());
 
-                try {
-                    dh.open();
-                }
-                catch(Exception e)
-                {
-                    Toast.makeText(getApplicationContext(), "error sql exception", Toast.LENGTH_SHORT).show();
-
-                }
-
-                dh.insert(n);
-                setResult(RESULT_OK);
-                finish();
-
-            }
-        });
     }
 }
+
+
