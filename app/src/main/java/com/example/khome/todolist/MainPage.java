@@ -117,7 +117,7 @@ public class MainPage extends AppCompatActivity {
         lv1.setAdapter(adapter);
 
         dh.close();
-        if(requestCode==1)
+        if((requestCode==1) && (resultCode==RESULT_OK))
         {
 //            Toast.makeText(getApplicationContext(),"Note Added",Toast.LENGTH_SHORT).show();
 
@@ -127,7 +127,7 @@ public class MainPage extends AppCompatActivity {
             snackbar.show();
         }
 
-        if(requestCode==6)
+        if((requestCode==6) && (resultCode==RESULT_OK))
         {
 //            Toast.makeText(getApplicationContext(),"Note Added",Toast.LENGTH_SHORT).show();
 
