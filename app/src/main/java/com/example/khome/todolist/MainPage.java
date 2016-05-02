@@ -94,6 +94,12 @@ public class MainPage extends AppCompatActivity {
                 startActivityForResult(i, 1);
 
                 return true;
+            case R.id.profile:
+
+                Intent i1=new Intent(getApplicationContext(),Login.class);
+                startActivityForResult(i1, 2);
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

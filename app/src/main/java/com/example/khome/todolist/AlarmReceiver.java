@@ -24,16 +24,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         System.out.println("in alarm recieve");
 
-        /*NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Notification notification = new Notification(R.drawable.ic_access_time_black_24dp,"Note Notification", System.currentTimeMillis());
-        Intent notificationIntent = new Intent(context.getApplicationContext(),MainPage.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context.getApplicationContext(), 0,notificationIntent, 0);
-
-
-        notification.
-        notification.setLatestEventInfo(MainActivity.this, notificationTitle,notificationMessage, pendingIntent);
-        notificationManager.notify(9999, notification);*/
 
 
         Intent i = new Intent(context.getApplicationContext(), MainPage.class);

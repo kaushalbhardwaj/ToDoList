@@ -7,4 +7,7 @@
         android:icon="@drawable/ic_add_circle_outline_white_24dp"
         />
 
+    <item android:id="@+id/profile"
+        android:title="Profile"
+        />
 </menu>
